@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Attendance</string>
+    <string name="employee_id">Employee Id</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="password">Password</string>
+    <string name="first_name">First Name</string>
+    <string name="middle_name">Middle Name</string>
+    <string name="last_name">Last Name</string>
+
+    <string name="location">Location</string>
+    <string name="location_desc">Location permission is needed to get your current location, would you like to reconsider?</string>
+    <string name="call_des">To Call user you need to give accept call permission.</string>
+    <string name="call_title">Call</string>
+    <string name="camera">Camera</string>
+    <string name="camera_desc">Camera Access permission needed to Open.</string>
+    <string name="sdcard">SD CARD</string>
+    <string name="sdcard_des">SD CARD read permission needed.</string>
+    <string name="update_profile_text">Update</string>
+    <string name="date_of_birth">DOT</string>
+    <string name="pan_number">Pan Number</string>
+    <string name="emergency_contact">Emergency Contact</string>
+    <string name="contact">Contact</string>
+    <string name="email">Email</string>
+    <string name="official_info">Official Info</string>
+    <string name="branch">Branch</string>
+    <string name="department">Department</string>
+    <string name="designation">Designation</string>
+    <string name="date_of_joining">Date of Joining</string>
+    <string name="reporting_to">Reporting To</string>
+    <string name="company">Company</string>
+    <string name="logo_image">Logo Image</string>
+    <string name="attendance">Attendance</string>
+    <string name="attendance_policy">Attendance Policy</string>
+    <string name="about_us">About Us</string>
+    <string name="change_password">Change Password</string>
+    <string name="logout">Logout</string>
+</resources>
