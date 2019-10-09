@@ -1,4 +1,4 @@
-package com.ext.attendance.modules.login.viewmodels;
+package com.ext.attendance.modules.login.view;
 
 public interface LoginNavigator {
     void handleError(Throwable throwable);

@@ -3,14 +3,33 @@ package com.ext.attendance.base;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class GeneralResponse {
-    @SerializedName("statusCode")
-    @Expose
-    int statusCode = 0;
+public abstract class GeneralResponse {
 
-    @SerializedName("message")
     @Expose
-    String message = "";
+    @SerializedName("data")
+    private Data data;
+    @Expose
+    @SerializedName("status")
+    private int status;
+    @Expose
+    @SerializedName("message")
+    private String message;
+
+    public Data getData() {
+        return data;
+    }
+
+    public void setData(Data data) {
+        this.data = data;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public String getMessage() {
         return message;
@@ -18,25 +37,5 @@ public class GeneralResponse {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    @SerializedName("status")
-    @Expose
-    String status = "";
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public int getStatusCode() {
-        return statusCode;
-    }
-
-    public void setStatusCode(int statusCode) {
-        this.statusCode = statusCode;
     }
 }

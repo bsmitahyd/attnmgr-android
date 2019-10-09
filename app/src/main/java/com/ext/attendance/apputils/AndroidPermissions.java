@@ -18,11 +18,14 @@ public class AndroidPermissions {
     public static final int REQUEST_CAMERA = 2;
     public static final int REQUEST_READ_SD_CARD = 3;
     public static final int REQUEST_CALL = 4;
+    public static final int REQUEST__READ_PHONE_STATE = 6;
     /**
      * Id to identify a SMS permission request.
      */
     public static final int REQUEST_READ_SMS = 5;
     private static String[] PERMISSIONS_CALL = {Manifest.permission.CALL_PHONE};
+
+    private static String[] PERMISSION_PHONE = {Manifest.permission.READ_PHONE_STATE};
 
     private static String[] PERMISSIONS_CAMERA = {Manifest.permission.CAMERA};
 
@@ -45,6 +48,16 @@ public class AndroidPermissions {
         if (ActivityCompat.checkSelfPermission(thisActivity, Manifest.permission.CALL_PHONE)
                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(thisActivity,
                 Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean checkPhoneStatePermission(Context thisActivity) {
+        if (ActivityCompat.checkSelfPermission(thisActivity, Manifest.permission.READ_PHONE_STATE)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(thisActivity,
+                Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
             return false;
         } else {
             return true;

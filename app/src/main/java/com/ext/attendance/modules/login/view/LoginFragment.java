@@ -1,6 +1,10 @@
 package com.ext.attendance.modules.login.view;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +22,7 @@ import com.ext.attendance.modules.login.models.LoginResponseModel;
 import com.ext.attendance.modules.login.viewmodels.LoginViewModel;
 import com.ext.attendance.prefs.Session;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.gson.JsonObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -90,9 +95,16 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
 
         switch (v.getId()) {
             case R.id.btnLogin:
-                if (mLoginViewModel.inputValidation(employeeIdEditText.getText().toString(), passwordEditText.getText().toString())) {
-                    if (mLoginViewModel.getGeneralResponseMutableLiveData().getValue() != null) {
-                       // mLoginViewModel.getGeneralResponseMutableLiveData()
+                TelephonyManager telephonyManager;
+
+                String androidId = Settings.Secure.getString(getContentResolver(),
+                        Settings.Secure.ANDROID_ID);
+
+                if (mLoginViewModel.inputValidation(employeeIdEditText.getText().toString(), passwordEditText.getText().toString(), androidId)) {
+                    if (mLoginViewModel.getLoginRequestJsonObjectData().getValue() != null) {
+                        JsonObject jsonObject = new JsonObject();
+
+                        mLoginViewModel.getLoginRequestJsonObjectData().setValue(jsonObject);
                     }
                 }
                 break;

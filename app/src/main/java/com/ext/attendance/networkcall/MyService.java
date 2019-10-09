@@ -1,9 +1,6 @@
 package com.ext.attendance.networkcall;
 
 import com.ext.attendance.base.GeneralResponse;
-import com.ext.attendance.modules.home.models.AttendanceCheckInOutRequestModel;
-import com.ext.attendance.modules.home.models.AttendanceCheckInOutResponseModel;
-import com.ext.attendance.modules.home.models.AttendanceCurrentMonthResponseModel;
 import com.ext.attendance.modules.login.models.LoginResponseModel;
 import com.google.gson.JsonObject;
 
@@ -24,10 +21,10 @@ public interface MyService {
     Observable<LoginResponseModel> employeeLoginApiCall(@Body JsonObject jsonObject);
 
     //TODO Attendance Checkin - Checkout
-    @POST("attendance/checkInCheckout")
-    Observable<AttendanceCheckInOutResponseModel> attendanceCheckInOutApiCall(@Body JsonObject jsonObject);
+   // @POST("attendance/checkInCheckout")
+   // Observable<AttendanceCheckInOutResponseModel> attendanceCheckInOutApiCall(@Body JsonObject jsonObject);
 
     // TODO Attendance list for current month
-    @GET("attendance/getCurrentMonthAttendance")
-    Observable<AttendanceCurrentMonthResponseModel> attendanceCurrentMListApiCall(@Query("employeeId") int employeeId);
+   // @GET("attendance/getCurrentMonthAttendance")
+  //  Observable<AttendanceCurrentMonthResponseModel> attendanceCurrentMListApiCall(@Query("employeeId") int employeeId);
 }
