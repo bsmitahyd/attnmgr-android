@@ -17,7 +17,7 @@
     <string name="sdcard">SD CARD</string>
     <string name="sdcard_des">SD CARD read permission needed.</string>
     <string name="update_profile_text">Update</string>
-    <string name="date_of_birth">DOT</string>
+    <string name="date_of_birth">DOB</string>
     <string name="pan_number">Pan Number</string>
     <string name="emergency_contact">Emergency Contact</string>
     <string name="contact">Contact</string>
@@ -35,4 +35,8 @@
     <string name="about_us">About Us</string>
     <string name="change_password">Change Password</string>
     <string name="logout">Logout</string>
+    <string name="drawer_open">Drawer Open</string>
+    <string name="drawer_close">Drawer Close</string>
+
+
 </resources>

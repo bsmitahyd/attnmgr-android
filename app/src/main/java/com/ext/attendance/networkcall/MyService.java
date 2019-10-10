@@ -20,9 +20,9 @@ public interface MyService {
     @POST("employee/login")
     Observable<LoginResponseModel> employeeLoginApiCall(@Body JsonObject jsonObject);
 
-    //TODO Attendance Checkin - Checkout
-   // @POST("attendance/checkInCheckout")
-   // Observable<AttendanceCheckInOutResponseModel> attendanceCheckInOutApiCall(@Body JsonObject jsonObject);
+   // TODO Attendance Checkin - Checkout
+   //@POST("attendance/checkInCheckout")
+   //Observable<AttendanceCheckInOutResponseModel> attendanceCheckInOutApiCall(@Body JsonObject jsonObject);
 
     // TODO Attendance list for current month
    // @GET("attendance/getCurrentMonthAttendance")

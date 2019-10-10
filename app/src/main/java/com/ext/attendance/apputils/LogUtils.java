@@ -2,7 +2,8 @@ package com.ext.attendance.apputils;
 
 
 
-import com.ojas.panditapp.BuildConfig;
+
+import com.ext.attendance.BuildConfig;
 
 import timber.log.Timber;
 

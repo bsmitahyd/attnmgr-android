@@ -14,18 +14,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tvFName"
                 style="@style/TextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etName"
+                    android:id="@+id/etFName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
                     android:hint="@string/first_name"
                     android:imeOptions="actionNext"
                     android:inputType="text"
@@ -45,7 +46,6 @@
                     android:id="@+id/etMName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
                     android:hint="@string/middle_name"
                     android:imeOptions="actionNext"
                     android:inputType="text"
@@ -65,7 +65,6 @@
                     android:id="@+id/etLName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
                     android:hint="@string/last_name"
                     android:imeOptions="actionNext"
                     android:inputType="text"
@@ -85,7 +84,6 @@
                     android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
                     android:hint="@string/email"
                     android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"
@@ -105,11 +103,11 @@
                     android:id="@+id/etContact"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
                     android:ems="10"
                     android:hint="@string/contact"
                     android:imeOptions="actionNext"
                     android:inputType="number"
+                    android:maxLength="10"
                     android:padding="10dp"
                     android:textColor="@color/app_text_color_black"
                     android:textColorHint="@color/hint_color" />
@@ -126,11 +124,11 @@
                     android:id="@+id/etEmergencyContact"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
                     android:ems="10"
                     android:hint="@string/emergency_contact"
                     android:imeOptions="actionNext"
                     android:inputType="number"
+                    android:maxLength="10"
                     android:padding="10dp"
                     android:textColor="@color/app_text_color_black"
                     android:textColorHint="@color/hint_color" />
@@ -147,11 +145,55 @@
                     android:id="@+id/etPanNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
                     android:ems="10"
                     android:hint="@string/pan_number"
                     android:imeOptions="actionNext"
                     android:inputType="textCapCharacters"
+                    android:maxLength="10"
+                    android:padding="10dp"
+                    android:textColor="@color/app_text_color_black"
+                    android:textColorHint="@color/hint_color" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tvDateOfBirth"
+                style="@style/TextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etDateOfBirth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:drawableEnd="@drawable/ic_calendar"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:hint="@string/date_of_birth"
+                    android:imeOptions="actionNext"
+                    android:inputType="date"
+                    android:padding="10dp"
+                    android:textColor="@color/app_text_color_black"
+                    android:textColorHint="@color/hint_color" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tvDesignation"
+                style="@style/TextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etDesignation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="10dp"
+                    android:hint="@string/designation"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
                     android:padding="10dp"
                     android:textColor="@color/app_text_color_black"
                     android:textColorHint="@color/hint_color" />
@@ -159,48 +201,92 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tvDOB"
+                android:id="@+id/tvDepartment"
                 style="@style/TextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etDOB"
+                    android:id="@+id/etDepartment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:drawableEnd="@drawable/ic_calendar"
-                    android:hint="@string/date_of_birth"
-                    android:imeOptions="actionNext"
-                    android:inputType="date"
-                    android:padding="10dp"
                     android:drawablePadding="10dp"
+                    android:hint="@string/department"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:padding="10dp"
                     android:textColor="@color/app_text_color_black"
                     android:textColorHint="@color/hint_color" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <LinearLayout
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tvDateOfJoining"
+                style="@style/TextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etDateOfJoining"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:drawableEnd="@drawable/ic_calendar"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:hint="@string/date_of_joining"
+                    android:imeOptions="actionNext"
+                    android:inputType="date"
+                    android:padding="10dp"
+                    android:textColor="@color/app_text_color_black"
+                    android:textColorHint="@color/hint_color" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tvReportTo"
+                style="@style/TextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etReportTo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="10dp"
+                    android:hint="@string/reporting_to"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:padding="10dp"
+                    android:textColor="@color/app_text_color_black"
+                    android:textColorHint="@color/hint_color" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/buttonRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2">
+                android:background="@drawable/rounded_corner_button_bg"
+                android:padding="@dimen/_10sdp"
+                android:text="Register" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="10dp"
-                    android:text="Pan Pic" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right|end"
-                    android:layout_weight="1"
-                    android:padding="@dimen/_10sdp"
-                    android:src="@drawable/ic_camera"/>
-            </LinearLayout>
+            <ProgressBar
+                android:id="@+id/pbRegister"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/emailEditTextCv"
+                app:layout_constraintStart_toStartOf="@+id/emailEditTextCv"
+                app:layout_constraintTop_toTopOf="@+id/emailEditTextCv" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

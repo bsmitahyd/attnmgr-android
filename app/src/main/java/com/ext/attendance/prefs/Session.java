@@ -16,12 +16,13 @@ public class Session {
 
     private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
 
+    private static final String EMPLOYEE_ID = "employeeId";
     private static final String USER_ID = "userId";
     private static final String AUTH_ID = "authId";
     private static final String ADMIN_ID = "adminId";
     private static final String USER_NAME = "username";
     private static final String EMAIL = "email";
-    private static final String MOBILE = "mobile";
+    private static final String CONTACT = "contact";
     private static final String DEVICE_ID = "deviceId";
     private static final String USER_TYPE = "userType";
     private static final String IS_ADDRESS_UPDATED = "address_updated";
@@ -45,6 +46,15 @@ public class Session {
         return pref.getBoolean(IS_FIRST_TIME_LAUNCH, true);
     }
 
+
+    public void setEmployeeId(String employeeId) {
+        editor.putString(EMPLOYEE_ID, employeeId);
+        editor.commit();
+    }
+
+    public String getEmployeeId() {
+        return pref.getString(EMPLOYEE_ID,"");
+    }
 
     public void setUserId(int userId) {
         editor.putInt(USER_ID, userId);
@@ -94,13 +104,13 @@ public class Session {
         return pref.getString(EMAIL, "");
     }
 
-    public void setMobile(String username) {
-        editor.putString(MOBILE, username);
+    public void setContact(String username) {
+        editor.putString(CONTACT, username);
         editor.commit();
     }
 
-    public String getMobile() {
-        return pref.getString(MOBILE, "");
+    public String getContact() {
+        return pref.getString(CONTACT, "");
     }
 
 

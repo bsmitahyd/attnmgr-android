@@ -3,7 +3,7 @@ package com.ext.attendance.base;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public abstract class GeneralResponse {
+public  class GeneralResponse {
 
     @Expose
     @SerializedName("data")
