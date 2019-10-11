@@ -4,6 +4,10 @@
     <group android:checkableBehavior="single">
 
         <item
+            android:id="@+id/nav_profile_fragment"
+
+            android:title="@string/attendance" />
+        <item
             android:id="@+id/nav_attendance_fragment"
 
             android:title="@string/attendance" />

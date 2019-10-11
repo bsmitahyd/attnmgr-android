@@ -18,18 +18,19 @@
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tvFName"
+                android:id="@+id/tvName"
                 style="@style/TextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etFName"
+                    android:id="@+id/etName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/first_name"
+                    android:hint="@string/name"
                     android:imeOptions="actionNext"
                     android:inputType="text"
+                    android:maxLength="10"
                     android:padding="10dp"
                     android:textColor="@color/app_text_color_black"
                     android:textColorHint="@color/hint_color" />
@@ -87,6 +88,27 @@
                     android:hint="@string/email"
                     android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"
+                    android:padding="10dp"
+                    android:textColor="@color/app_text_color_black"
+                    android:textColorHint="@color/hint_color" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tvUserName"
+                style="@style/TextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etUserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/username"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:ems="10"
                     android:padding="10dp"
                     android:textColor="@color/app_text_color_black"
                     android:textColorHint="@color/hint_color" />
@@ -171,7 +193,6 @@
                     android:drawableEnd="@drawable/ic_calendar"
                     android:drawablePadding="10dp"
                     android:ems="10"
-                    android:focusable="false"
                     android:hint="@string/date_of_birth"
                     android:imeOptions="actionNext"
                     android:inputType="date"
@@ -235,7 +256,6 @@
                     android:drawableEnd="@drawable/ic_calendar"
                     android:drawablePadding="10dp"
                     android:ems="10"
-                    android:focusable="false"
                     android:hint="@string/date_of_joining"
                     android:imeOptions="actionNext"
                     android:inputType="date"

@@ -19,21 +19,29 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.ext.attendance.R;
+import com.ext.attendance.apputils.AppUtils;
 import com.ext.attendance.base.BaseActivity;
+import com.ext.attendance.modules.home.viewmodel.EmployeeAttendanceListViewModel;
 import com.ext.attendance.modules.login.view.LoginBaseActivity;
+import com.ext.attendance.modules.sidemenu.view.AboutUsFragment;
+import com.ext.attendance.modules.sidemenu.view.AttendanceFragment;
+import com.ext.attendance.modules.sidemenu.view.AttendancePolicyFragment;
+import com.ext.attendance.modules.sidemenu.view.ChangePasswordFragment;
+import com.ext.attendance.modules.sidemenu.view.ProfileFragment;
 import com.ext.attendance.prefs.Session;
 import com.google.android.material.navigation.NavigationView;
 
-public class HomeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class HomeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDrawer;
     public Toolbar toolbar;
     private NavigationView nvDrawer;
     private View navHeader;
     public TextView toolbarTitle;
-   // private ServiceListViewModel serviceListViewModel;
+    private EmployeeAttendanceListViewModel employeeAttendanceListViewModel;
 
     private static final int TIME_DELAY = 2000;
     private static long back_pressed;
@@ -51,10 +59,19 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         initView(savedInstanceState);
     }
 
+    public void addFragment(Fragment fragment, boolean addToBackStack) {
+
+        if (addToBackStack)
+            getSupportFragmentManager().beginTransaction().replace(R.id.home_container, fragment, "currentFragment").addToBackStack(null).commit();
+        else
+            getSupportFragmentManager().beginTransaction().replace(R.id.home_container, fragment, "currentFragment").commit();
+
+    }
+
     private void initView(Bundle savedInstanceState) {
         session = new Session(this);
 
-       // serviceListViewModel = ViewModelProviders.of(this).get(ServiceListViewModel.class);
+        employeeAttendanceListViewModel = ViewModelProviders.of(this).get(EmployeeAttendanceListViewModel.class);
 
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("");
@@ -81,7 +98,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
         //username
         employeeIdTextView = navHeader.findViewById(R.id.tvEmployeeId);
-        employeeIdTextView.setText(String.valueOf("EmployeeId"+session.getEmployeeId()));
+        employeeIdTextView.setText(String.valueOf("EmployeeId" + session.getEmployeeId()));
 
 
         //Select Home by default
@@ -93,14 +110,6 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                 addFragment(fragment, false);
         }
     }
-    public void addFragment(Fragment fragment, boolean addToBackStack) {
-
-        if (addToBackStack)
-            getSupportFragmentManager().beginTransaction().replace(R.id.home_container, fragment).addToBackStack(null).commit();
-        else
-            getSupportFragmentManager().beginTransaction().replace(R.id.home_container, fragment).commit();
-
-    }
 
     public void removeAllBackStack() {
         int backStackCount = getSupportFragmentManager().getBackStackEntryCount();
@@ -111,7 +120,36 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        return false;
+        int id = menuItem.getItemId();
+        Fragment fragment;
+        clearBackStack();
+        if (id == R.id.nav_profile_fragment) {
+            fragment = new ProfileFragment();
+            toolbarTitle.setText(AppUtils.capitalizeFirstLetter(getString(R.string.profile)));
+            addFragment(fragment, false);
+        } else if (id == R.id.nav_attendance_fragment) {
+            fragment = new AttendanceFragment();
+            toolbarTitle.setText(AppUtils.capitalizeFirstLetter(getString(R.string.attendance)));
+            addFragment(fragment, false);
+        } else if (id == R.id.nav_attendance_policy_fragment) {
+            fragment = new AttendancePolicyFragment();
+            toolbarTitle.setText(AppUtils.capitalizeFirstLetter(getString(R.string.attendance_policy)));
+            addFragment(fragment, false);
+        } else if (id == R.id.nav_aboutus_fragment) {
+            fragment = new AboutUsFragment();
+            toolbarTitle.setText(AppUtils.capitalizeFirstLetter(getString(R.string.about_us)));
+            addFragment(fragment, false);
+        } else if (id == R.id.nav_change_password_fragment) {
+            fragment = new ChangePasswordFragment();
+            toolbarTitle.setText(AppUtils.capitalizeFirstLetter(getString(R.string.change_password)));
+            addFragment(fragment, false);
+        } else if (id == R.id.nav_logout) {
+            showLogoutConfirmationDialog();
+        }
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
     @Override
@@ -176,7 +214,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     public void resetAndStartHome() {
-       // serviceListViewModel.clearViewModelData();
+        // serviceListViewModel.clearViewModelData();
         FragmentManager fm = getSupportFragmentManager();
         for (int i = 0; i < fm.getBackStackEntryCount(); i++) {
             fm.popBackStack();
@@ -186,13 +224,13 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     public void refreshProfileHeaders() {
-        employeeIdTextView.setText(String.valueOf("EmployeeId"+session.getEmployeeId()));
+        employeeIdTextView.setText(String.valueOf("EmployeeId" + session.getEmployeeId()));
     }
 
     private void clearBackStack() {
-//        if (serviceListViewModel != null) {
-//            serviceListViewModel.clearViewModelData();
-//        }
+        if (employeeAttendanceListViewModel != null) {
+            employeeAttendanceListViewModel.clearViewModelData();
+        }
         FragmentManager fm = getSupportFragmentManager();
         for (int i = 0; i < fm.getBackStackEntryCount(); i++) {
             fm.popBackStack();

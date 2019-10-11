@@ -49,12 +49,14 @@ public class RegisterFragment extends BaseFragment implements RegisterNavigator,
 
     @BindView(R.id.buttonRegister)
     Button registerButton;
-    @BindView(R.id.etFName)
-    TextInputEditText fNameTextInputEditText;
+    @BindView(R.id.etName)
+    TextInputEditText NameTextInputEditText;
     @BindView(R.id.etMName)
     TextInputEditText mNameTextInputEditText;
     @BindView(R.id.etLName)
     TextInputEditText lNameTextInputEditText;
+    @BindView(R.id.etUserName)
+    TextInputEditText usernameTextInputEditText;
     @BindView(R.id.etContact)
     TextInputEditText contactTextInputEditText;
     @BindView(R.id.etEmail)
@@ -89,7 +91,7 @@ public class RegisterFragment extends BaseFragment implements RegisterNavigator,
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.register_profile_fragment, container, false);
+        View view = inflater.inflate(layoutRes(), container, false);
         unbinder = ButterKnife.bind(this, view);
         return view;
     }
@@ -159,16 +161,6 @@ public class RegisterFragment extends BaseFragment implements RegisterNavigator,
         }
     }
 
-//    @Override
-//    public void onDateSet(DatePicker view, int year, int monthOfYear,
-//                          int dayOfMonth) {
-//        // TODO Auto-generated method stub
-//        myCalendar.set(Calendar.YEAR, year);
-//        myCalendar.set(Calendar.MONTH, monthOfYear);
-//        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-//        updateLabel();
-//    }
-
 
     @Override
     public void onClick(View view) {
@@ -177,17 +169,18 @@ public class RegisterFragment extends BaseFragment implements RegisterNavigator,
                 String androidId = Settings.Secure.getString(getContext().getContentResolver(),
                         Settings.Secure.ANDROID_ID);
 
-                if (mRegisterViewModel.inputValidation(fNameTextInputEditText.getText().toString(),
+                if (mRegisterViewModel.inputValidation(NameTextInputEditText.getText().toString(),
                         lNameTextInputEditText.getText().toString(), emailTextInputEditText.getText().toString(),
-                        contactTextInputEditText.getText().toString())) {
+                        contactTextInputEditText.getText().toString(),reportingToTextInputEditText.getText().toString())) {
                     if (mRegisterViewModel.getJsonObjectMutableLiveData().getValue() != null) {
                         JsonObject jsonObject = new JsonObject();
-                        jsonObject.addProperty(AppKeysInterface.FIRST_NAME, fNameTextInputEditText.getText().toString());
+                        jsonObject.addProperty(AppKeysInterface.FIRST_NAME, NameTextInputEditText.getText().toString());
                         jsonObject.addProperty(AppKeysInterface.MIDDLE_NAME, mNameTextInputEditText.getText().toString());
                         jsonObject.addProperty(AppKeysInterface.LAST_NAME, lNameTextInputEditText.getText().toString());
                         jsonObject.addProperty(AppKeysInterface.EMAIL, emailTextInputEditText.getText().toString());
+                        jsonObject.addProperty(AppKeysInterface.USERNAME,usernameTextInputEditText.getText().toString());
                         jsonObject.addProperty(AppKeysInterface.CONTACT, contactTextInputEditText.getText().toString());
-                        jsonObject.addProperty(AppKeysInterface.EMERGANCY_CONTACT, emergencyContactTextInputEditText.getText().toString());
+                        jsonObject.addProperty(AppKeysInterface.EMERGENCY_CONTACT, emergencyContactTextInputEditText.getText().toString());
                         jsonObject.addProperty(AppKeysInterface.PAN_NO, panNumberTextInputEditText.getText().toString());
                         jsonObject.addProperty(AppKeysInterface.DOB, dobTextInputEditText.getText().toString());
                         jsonObject.addProperty(AppKeysInterface.DOJ, contactTextInputEditText.getText().toString());
@@ -197,10 +190,12 @@ public class RegisterFragment extends BaseFragment implements RegisterNavigator,
                         jsonObject.addProperty(AppKeysInterface.DEVICE_ID, androidId);
 
 
-                        Timber.d("%s%s", AppKeysInterface.FIRST_NAME, fNameTextInputEditText.getText().toString());
+                        Timber.d("%s%s", AppKeysInterface.FIRST_NAME, NameTextInputEditText.getText().toString());
                         Timber.d("%s%s", AppKeysInterface.LAST_NAME, lNameTextInputEditText.getText().toString());
                         Timber.d("%s%s", AppKeysInterface.EMAIL, emailTextInputEditText.getText().toString());
                         Timber.d("%s%s", AppKeysInterface.CONTACT, contactTextInputEditText.getText().toString());
+
+                        mRegisterViewModel.getJsonObjectMutableLiveData().setValue(jsonObject);
 
                         mRegisterViewModel.employeeRegister();
                     }

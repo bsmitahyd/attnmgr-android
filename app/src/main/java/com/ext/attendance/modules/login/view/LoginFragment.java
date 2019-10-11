@@ -100,7 +100,9 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
                     session.setLname(loginResponseModel.getData().getLastname());
                     session.setEmail(loginResponseModel.getData().getEmail());
                     session.setContact(loginResponseModel.getData().getContact());
+
                     startActivity(new Intent(activity, HomeActivity.class));
+
                     activity.finish();
                 }
             }

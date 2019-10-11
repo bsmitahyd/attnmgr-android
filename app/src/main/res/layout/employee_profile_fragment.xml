@@ -59,7 +59,7 @@
                     android:id="@+id/fNameEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="@string/first_name"
+                    android:hint="@string/name"
                     android:inputType="textPersonName"
                     android:maxLength="100"
                     android:maxLines="1"

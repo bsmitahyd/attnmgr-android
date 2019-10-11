@@ -2,15 +2,14 @@ package com.ext.attendance.networkcall;
 
 
 import com.ext.attendance.base.GeneralResponse;
+import com.ext.attendance.modules.home.models.CurrentMonthAttendanceResponseModel;
+import com.ext.attendance.modules.home.models.EmployeeCheckInOutResponseModel;
 import com.ext.attendance.modules.login.models.LoginResponseModel;
 import com.google.gson.JsonObject;
 
 import io.reactivex.Observable;
-import okhttp3.MultipartBody;
 import retrofit2.http.Body;
-import retrofit2.http.Part;
 import retrofit2.http.Query;
-import retrofit2.http.Url;
 
 public abstract class MyApiService {
 
@@ -34,4 +33,10 @@ public abstract class MyApiService {
     // employeeLoginApiCall
     public abstract Observable<LoginResponseModel> employeeLoginApiCall(@Body JsonObject jsonObject);
 
-  }
+    // employeeAttendanceCheckInOutApiCall
+    public abstract Observable<EmployeeCheckInOutResponseModel> employeeAttendanceCheckInOutApiCall(@Body JsonObject jsonObject);
+
+    //currentMonthAttendanceListApiCall
+    public abstract  Observable<CurrentMonthAttendanceResponseModel> getCurrentMonthAttendanceListByEmpId(@Query("employeeId") String employeeId);
+
+}

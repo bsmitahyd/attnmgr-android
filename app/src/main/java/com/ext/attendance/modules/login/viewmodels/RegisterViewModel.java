@@ -43,8 +43,8 @@ public class RegisterViewModel extends BaseViewModel<RegisterNavigator> {
         return jsonObjectMutableLiveData;
     }
 
-  public boolean inputValidation(String fName, String lName, String email, String contact) {
-        if (fName.isEmpty()) {
+  public boolean inputValidation(String Name, String lName, String email, String contact, String reportingTo) {
+        if (Name.isEmpty()) {
             return false;
         }
 //        if(mName.isEmpty()){
@@ -60,6 +60,9 @@ public class RegisterViewModel extends BaseViewModel<RegisterNavigator> {
             return false;
         }
         if (contact.length() < 10) {
+            return false;
+        }
+        if(reportingTo.isEmpty()){
             return false;
         }
 //        if(emergancyContact.isEmpty()){

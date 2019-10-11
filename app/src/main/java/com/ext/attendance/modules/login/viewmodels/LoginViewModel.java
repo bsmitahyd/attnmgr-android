@@ -63,7 +63,8 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
 
     public void loginEmployee() {
         getNavigator().loadProgressBar(true);
-        mDisposable = MyApiService.getService().employeeLoginApiCall(jsonObjectMutableLiveData.getValue()).subscribe(new Consumer<LoginResponseModel>() {
+        mDisposable = MyApiService.getService().employeeLoginApiCall(jsonObjectMutableLiveData.getValue()).
+                subscribe(new Consumer<LoginResponseModel>() {
             @Override
             public void accept(LoginResponseModel loginResponseModel) throws Exception {
                 getNavigator().loadProgressBar(false);

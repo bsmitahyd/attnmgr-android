@@ -4,7 +4,7 @@
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="password">Password</string>
-    <string name="first_name">First Name</string>
+    <string name="name">Name</string>
     <string name="middle_name">Middle Name</string>
     <string name="last_name">Last Name</string>
 
@@ -30,6 +30,7 @@
     <string name="reporting_to">Reporting To</string>
     <string name="company">Company</string>
     <string name="logo_image">Logo Image</string>
+    <string name="profile">Profile</string>
     <string name="attendance">Attendance</string>
     <string name="attendance_policy">Attendance Policy</string>
     <string name="about_us">About Us</string>
@@ -37,6 +38,11 @@
     <string name="logout">Logout</string>
     <string name="drawer_open">Drawer Open</string>
     <string name="drawer_close">Drawer Close</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="checkin">CheckIn</string>
+    <string name="checkout">CheckOut</string>
+    <string name="submit">Submit</string>
+    <string name="username">Username</string>
 
 
 </resources>
