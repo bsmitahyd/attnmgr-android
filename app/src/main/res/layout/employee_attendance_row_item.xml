@@ -3,60 +3,83 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:background="@color/grey_333"
-    app:cardCornerRadius="6dp"
-    app:cardElevation="6dp">
+    android:elevation="@dimen/_5sdp"
+    app:cardUseCompatPadding="true">
 
-    <LinearLayout
-        android:id="@+id/llMain"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clCheckInOut"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="@dimen/_8sdp">
-
-        <TextView
-            android:id="@+id/tvMessage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start|center"
-            android:padding="@dimen/_10sdp"
-            android:text="Attendance List"
-            android:textColor="@color/app_text_color_black" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tvCurrentDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start|center"
-            android:padding="@dimen/_10sdp"
-            android:textColor="@color/app_text_color_black" />
-
-        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2">
+            android:gravity="center|start"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="12/10/2019"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tvCheckIn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_3sdp"
-                android:layout_gravity="start|center"
-                android:layout_weight="1"
-                android:padding="@dimen/_8sdp"
-                android:textColor="@color/app_text_color_black" />
 
-            <TextView
-                android:id="@+id/tvCheckOut"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_3sdp"
-                android:layout_gravity="end|center"
-                android:layout_weight="1"
-                android:padding="@dimen/_8sdp"
-                android:textColor="@color/app_text_color_black" />
-        </LinearLayout>
-    </LinearLayout>
+        <TextView
+            android:id="@+id/tvCheckIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:text="@string/check_in_time"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@android:color/black"
+            app:layout_constraintStart_toStartOf="@+id/tvCurrentDate"
+            app:layout_constraintTop_toBottomOf="@+id/tvCurrentDate" />
+
+        <TextView
+            android:id="@+id/tvCheckOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:text="@string/check_out_at"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="@+id/tvCurrentDate"
+            app:layout_constraintTop_toBottomOf="@+id/tvCurrentDate" />
+
+        <TextView
+            android:id="@+id/tvCheckInTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="@+id/tvCheckIn"
+            app:layout_constraintStart_toStartOf="@+id/tvCheckIn"
+            app:layout_constraintTop_toBottomOf="@+id/tvCheckIn" />
+
+
+        <TextView
+            android:id="@+id/tvCheckOutTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginTop="@dimen/_5sdp"
+            app:layout_constraintEnd_toEndOf="@+id/tvCheckOut"
+            app:layout_constraintStart_toStartOf="@+id/tvCheckOut"
+            app:layout_constraintTop_toBottomOf="@+id/tvCheckOut" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.cardview.widget.CardView>

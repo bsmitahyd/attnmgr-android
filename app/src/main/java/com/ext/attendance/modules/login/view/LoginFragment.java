@@ -96,13 +96,15 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
             public void onChanged(LoginResponseModel loginResponseModel) {
                 if (loginResponseModel != null && loginResponseModel.getStatus() == 200) {
                     Toast.makeText(activity, "login Success", Toast.LENGTH_LONG).show();
+                    session.setId(loginResponseModel.getData().getId());
+                    session.setEmployeeId(loginResponseModel.getData().getEmployeeid());
+                    session.setUsername(loginResponseModel.getData().getUsername());
                     session.setFname(loginResponseModel.getData().getName());
                     session.setLname(loginResponseModel.getData().getLastname());
                     session.setEmail(loginResponseModel.getData().getEmail());
                     session.setContact(loginResponseModel.getData().getContact());
-
+                    //TODO starting new activity and finishing login activity
                     startActivity(new Intent(activity, HomeActivity.class));
-
                     activity.finish();
                 }
             }
@@ -129,7 +131,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
                         JsonObject jsonObject = new JsonObject();
                         jsonObject.addProperty(AppKeysInterface.EMPLOYEE_ID, employeeIdEditText.getText().toString());
                         jsonObject.addProperty(AppKeysInterface.PASSWORD, passwordEditText.getText().toString());
-                        jsonObject.addProperty(AppKeysInterface.DEVICE_ID, "abcdef");
+                        jsonObject.addProperty(AppKeysInterface.DEVICE_ID, androidId);
                         Timber.d("%s%s", AppKeysInterface.EMPLOYEE_ID, employeeIdEditText.getText().toString());
                         Timber.d("%s%s", AppKeysInterface.PASSWORD, passwordEditText.getText().toString());
                         Timber.d("%s%s", AppKeysInterface.DEVICE_ID, androidId);
@@ -186,8 +188,21 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     public void onResume() {
         super.onResume();
         if (activity.toolbar != null) {
-            activity.toolbarTitle.setText("Login");
+            activity.toolbarTitle.setText(R.string.login);
             activity.toolbar.setTitle("");
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (unbinder != null) {
+            unbinder.unbind();
         }
     }
 }

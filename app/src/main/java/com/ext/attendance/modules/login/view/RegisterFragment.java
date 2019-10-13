@@ -1,5 +1,6 @@
 package com.ext.attendance.modules.login.view;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import com.ext.attendance.base.GeneralResponse;
 import com.ext.attendance.modules.login.viewmodels.RegisterViewModel;
 import com.ext.attendance.prefs.Session;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 
@@ -33,6 +35,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.TimeZone;
 
 import butterknife.BindView;
@@ -46,6 +49,7 @@ public class RegisterFragment extends BaseFragment implements RegisterNavigator,
     private Unbinder unbinder;
     private RegisterViewModel mRegisterViewModel;
     final Calendar myCalendar = Calendar.getInstance();
+    private Session session;
 
     @BindView(R.id.buttonRegister)
     Button registerButton;
@@ -65,16 +69,10 @@ public class RegisterFragment extends BaseFragment implements RegisterNavigator,
     TextInputEditText emergencyContactTextInputEditText;
     @BindView(R.id.etPanNumber)
     TextInputEditText panNumberTextInputEditText;
-    @BindView(R.id.etDateOfJoining)
-    TextInputEditText dojTextInputEditText;
     @BindView(R.id.etDateOfBirth)
     TextInputEditText dobTextInputEditText;
-    @BindView(R.id.etDepartment)
-    TextInputEditText departmentTextInputEditText;
     @BindView(R.id.etDesignation)
     TextInputEditText designationTextInputEditText;
-    @BindView(R.id.etReportTo)
-    TextInputEditText reportingToTextInputEditText;
     @BindView(R.id.pbRegister)
     ProgressBar pbRegister;
 
@@ -86,6 +84,7 @@ public class RegisterFragment extends BaseFragment implements RegisterNavigator,
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Nullable
@@ -103,9 +102,9 @@ public class RegisterFragment extends BaseFragment implements RegisterNavigator,
     }
 
     private void initView() {
+        session = new Session(activity);
         registerButton.setOnClickListener(this);
         dobTextInputEditText.setOnClickListener(this);
-        dojTextInputEditText.setOnClickListener(this);
 
         activity.toolbar.setTitle("");
         activity.toolbarTitle.setText("Register");
@@ -166,63 +165,43 @@ public class RegisterFragment extends BaseFragment implements RegisterNavigator,
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.buttonRegister:
-                String androidId = Settings.Secure.getString(getContext().getContentResolver(),
+                @SuppressLint("HardwareIds")
+                String androidId = Settings.Secure.getString(activity.getContentResolver(),
                         Settings.Secure.ANDROID_ID);
 
-                if (mRegisterViewModel.inputValidation(NameTextInputEditText.getText().toString(),
+
+                if (mRegisterViewModel.inputValidation(Objects.requireNonNull(NameTextInputEditText.getText()).toString(),
                         lNameTextInputEditText.getText().toString(), emailTextInputEditText.getText().toString(),
-                        contactTextInputEditText.getText().toString(),reportingToTextInputEditText.getText().toString())) {
+                        contactTextInputEditText.getText().toString())) {
+
                     if (mRegisterViewModel.getJsonObjectMutableLiveData().getValue() != null) {
                         JsonObject jsonObject = new JsonObject();
                         jsonObject.addProperty(AppKeysInterface.FIRST_NAME, NameTextInputEditText.getText().toString());
                         jsonObject.addProperty(AppKeysInterface.MIDDLE_NAME, mNameTextInputEditText.getText().toString());
                         jsonObject.addProperty(AppKeysInterface.LAST_NAME, lNameTextInputEditText.getText().toString());
                         jsonObject.addProperty(AppKeysInterface.EMAIL, emailTextInputEditText.getText().toString());
-                        jsonObject.addProperty(AppKeysInterface.USERNAME,usernameTextInputEditText.getText().toString());
+                        jsonObject.addProperty(AppKeysInterface.USERNAME, usernameTextInputEditText.getText().toString());
                         jsonObject.addProperty(AppKeysInterface.CONTACT, contactTextInputEditText.getText().toString());
                         jsonObject.addProperty(AppKeysInterface.EMERGENCY_CONTACT, emergencyContactTextInputEditText.getText().toString());
                         jsonObject.addProperty(AppKeysInterface.PAN_NO, panNumberTextInputEditText.getText().toString());
                         jsonObject.addProperty(AppKeysInterface.DOB, dobTextInputEditText.getText().toString());
-                        jsonObject.addProperty(AppKeysInterface.DOJ, contactTextInputEditText.getText().toString());
-                        jsonObject.addProperty(AppKeysInterface.DESIGNATION, contactTextInputEditText.getText().toString());
-                        jsonObject.addProperty(AppKeysInterface.DEPARTMENT, contactTextInputEditText.getText().toString());
-                        jsonObject.addProperty(AppKeysInterface.REPORTING_TO, reportingToTextInputEditText.getText().toString());
                         jsonObject.addProperty(AppKeysInterface.DEVICE_ID, androidId);
+                        jsonObject.addProperty(AppKeysInterface.DEVICE_TOKEN, session.getDeviceToken());//device token used for push notificstion
+                        jsonObject.addProperty(AppKeysInterface.DEVICE_TYPE, AppKeysInterface.ANDROID);
 
-
-                        Timber.d("%s%s", AppKeysInterface.FIRST_NAME, NameTextInputEditText.getText().toString());
-                        Timber.d("%s%s", AppKeysInterface.LAST_NAME, lNameTextInputEditText.getText().toString());
-                        Timber.d("%s%s", AppKeysInterface.EMAIL, emailTextInputEditText.getText().toString());
-                        Timber.d("%s%s", AppKeysInterface.CONTACT, contactTextInputEditText.getText().toString());
-
+                        Timber.d("Register_DATA:%s", new Gson().toJson(jsonObject));
                         mRegisterViewModel.getJsonObjectMutableLiveData().setValue(jsonObject);
-
                         mRegisterViewModel.employeeRegister();
+
                     }
                 } else {
                     Toast.makeText(activity, "Please Enter All Required Fields!", Toast.LENGTH_LONG).show();
                 }
                 break;
             case R.id.etDateOfBirth:
-
                 dateDialog();
                 break;
-            case R.id.etDateOfJoining:
 
-                final Calendar cldr = Calendar.getInstance();
-                int day = cldr.get(Calendar.DAY_OF_MONTH);
-                int month = cldr.get(Calendar.MONTH);
-                int year = cldr.get(Calendar.YEAR);
-                // date picker dialog
-                DatePickerDialog picker = new DatePickerDialog(activity,
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                dojTextInputEditText.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                            }
-                        }, year, month, day);
-                picker.show();
-                break;
             default:
                 break;
         }
@@ -235,7 +214,6 @@ public class RegisterFragment extends BaseFragment implements RegisterNavigator,
 
 
         dobTextInputEditText.setText(sdf.format(myCalendar.getTime()));
-        dojTextInputEditText.setText(sdf.format(myCalendar.getTime()));
     }
 
     public void dateDialog() {

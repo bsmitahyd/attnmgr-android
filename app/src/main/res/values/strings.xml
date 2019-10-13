@@ -26,6 +26,7 @@
     <string name="branch">Branch</string>
     <string name="department">Department</string>
     <string name="designation">Designation</string>
+    <string name="attendance_for_month">Attendance For Month</string>
     <string name="date_of_joining">Date of Joining</string>
     <string name="reporting_to">Reporting To</string>
     <string name="company">Company</string>
@@ -43,6 +44,8 @@
     <string name="checkout">CheckOut</string>
     <string name="submit">Submit</string>
     <string name="username">Username</string>
+    <string name="check_in_time">Check-in At</string>
+    <string name="check_out_at">Check-out At</string>
 
 
 </resources>

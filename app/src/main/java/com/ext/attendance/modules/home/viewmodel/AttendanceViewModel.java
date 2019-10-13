@@ -4,9 +4,9 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.ext.attendance.MyApplication;
 import com.ext.attendance.base.BaseViewModel;
+import com.ext.attendance.base.CommonNavigator;
 import com.ext.attendance.modules.home.models.CurrentMonthAttendanceResponseModel;
 import com.ext.attendance.modules.home.models.EmployeeCheckInOutResponseModel;
-import com.ext.attendance.modules.home.view.EmployeeAttendanceNavigator;
 import com.ext.attendance.networkcall.MyApiService;
 import com.ext.attendance.prefs.Session;
 import com.google.gson.JsonObject;
@@ -14,17 +14,15 @@ import com.google.gson.JsonObject;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
-public class EmployeeAttendanceListViewModel extends BaseViewModel<EmployeeAttendanceNavigator> {
+public class AttendanceViewModel extends BaseViewModel<CommonNavigator> {
     private Disposable mDisposable = null;
     private MutableLiveData<EmployeeCheckInOutResponseModel> employeeCheckInOutResponseModelMutableLiveData;
     private MutableLiveData<JsonObject> jsonObjectMutableLiveData;
-    private EmployeeCheckInOutResponseModel employeeAttendanceData;
     private MutableLiveData<CurrentMonthAttendanceResponseModel> currentMonthAttendanceResponseModelMutableLiveData;
 
-    public EmployeeAttendanceListViewModel() {
+    public AttendanceViewModel() {
         employeeCheckInOutResponseModelMutableLiveData = new MutableLiveData<>();
         jsonObjectMutableLiveData = new MutableLiveData<>();
-        employeeAttendanceData = new EmployeeCheckInOutResponseModel();
         currentMonthAttendanceResponseModelMutableLiveData = new MutableLiveData<>();
         loadEmployeeAttendanceListData();
     }
@@ -33,31 +31,24 @@ public class EmployeeAttendanceListViewModel extends BaseViewModel<EmployeeAtten
         currentMonthAttendanceResponseModelMutableLiveData.setValue(new CurrentMonthAttendanceResponseModel());
         employeeCheckInOutResponseModelMutableLiveData.setValue(new EmployeeCheckInOutResponseModel());
         jsonObjectMutableLiveData.setValue(new JsonObject());
-        employeeAttendanceData = new EmployeeCheckInOutResponseModel();
     }
 
     public void clearViewModelData() {
         currentMonthAttendanceResponseModelMutableLiveData.setValue(null);
         employeeCheckInOutResponseModelMutableLiveData.setValue(null);
         jsonObjectMutableLiveData.setValue(null);
-        employeeAttendanceData = null;
     }
 
     public MutableLiveData<CurrentMonthAttendanceResponseModel> getCurrentMonthAttendanceResponseModelMutableLiveData() {
         return currentMonthAttendanceResponseModelMutableLiveData;
     }
 
-    public MutableLiveData<EmployeeCheckInOutResponseModel> getEmployeeAttendanceListViewModelMutableLiveData() {
+    public MutableLiveData<EmployeeCheckInOutResponseModel> getEmployeeCheckInOutResponseModelMutableLiveData() {
         return employeeCheckInOutResponseModelMutableLiveData;
     }
 
-
     public MutableLiveData<JsonObject> getJsonObjectMutableLiveData() {
         return jsonObjectMutableLiveData;
-    }
-
-    public EmployeeCheckInOutResponseModel getEmployeeAttendanceData() {
-        return employeeAttendanceData;
     }
 
     public void checkInCheckout() {
@@ -70,6 +61,7 @@ public class EmployeeAttendanceListViewModel extends BaseViewModel<EmployeeAtten
                         if (employeeCheckInOutResponseModel.getStatus() == 200) {
                             mDisposable.dispose();
                             employeeCheckInOutResponseModelMutableLiveData.setValue(employeeCheckInOutResponseModel);
+                            // getCurrentMonthAttendance();
                         } else {
                             getNavigator().loadProgressBar(false);
                         }

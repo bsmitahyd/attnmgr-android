@@ -17,13 +17,14 @@ public class Session {
     private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
 
     private static final String EMPLOYEE_ID = "employeeId";
+    private static final String ID = "_id";
     private static final String USER_ID = "userId";
     private static final String AUTH_ID = "authId";
     private static final String ADMIN_ID = "adminId";
     private static final String USER_NAME = "username";
     private static final String EMAIL = "email";
     private static final String CONTACT = "contact";
-    private static final String DEVICE_ID = "deviceId";
+    private static final String DEVICE_TOKEN = "deviceId";
     private static final String USER_TYPE = "userType";
     private static final String IS_ADDRESS_UPDATED = "address_updated";
 
@@ -47,13 +48,22 @@ public class Session {
     }
 
 
+    public void setId(String id) {
+        editor.putString(ID, id);
+        editor.commit();
+    }
+
+    public String getId() {
+        return pref.getString(ID, "");
+    }
+
     public void setEmployeeId(String employeeId) {
         editor.putString(EMPLOYEE_ID, employeeId);
         editor.commit();
     }
 
     public String getEmployeeId() {
-        return pref.getString(EMPLOYEE_ID,"");
+        return pref.getString(EMPLOYEE_ID, "");
     }
 
     public void setUserId(int userId) {
@@ -114,13 +124,13 @@ public class Session {
     }
 
 
-    public void setDeviceId(String deviceId) {
-        editor.putString(DEVICE_ID, deviceId);
+    public void setDeviceToken(String deviceId) {
+        editor.putString(DEVICE_TOKEN, deviceId);
         editor.commit();
     }
 
-    public String getDeviceId() {
-        return pref.getString(DEVICE_ID, "123");
+    public String getDeviceToken() {
+        return pref.getString(DEVICE_TOKEN, "123");
     }
 
     public void setUserType(String userType) {

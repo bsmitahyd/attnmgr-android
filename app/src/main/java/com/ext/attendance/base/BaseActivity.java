@@ -2,6 +2,7 @@ package com.ext.attendance.base;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -108,6 +109,27 @@ public abstract class BaseActivity extends AppCompatActivity {
                 inputManager.hideSoftInputFromWindow(context.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }
         }
+    }
+    /* Common method to launch the new activity which is being used from all the activity classes.
+     */
+    public void launchActivityAndFinish(Class<?> activityClass, Bundle mBundle) {
+        Intent intent = new Intent(BaseActivity.this, activityClass);
+        if (mBundle != null) {
+            intent.putExtras(mBundle);
+        }
+        startActivity(intent);
+        overridePendingTransition(R.anim.enter, R.anim.exit);
+        finish();
+
+    }
+
+    public void launchActivity(Class<?> activityClass, Bundle mBundle) {
+        Intent intent = new Intent(BaseActivity.this, activityClass);
+        if (mBundle != null) {
+            intent.putExtras(mBundle);
+        }
+        startActivity(intent);
+        overridePendingTransition(R.anim.enter, R.anim.exit);
     }
 
 

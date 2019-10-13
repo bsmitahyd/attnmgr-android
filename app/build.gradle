@@ -12,13 +12,15 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField("String", "BASE_URL", "\"http://192.168.2.173:3050/api/\"")
+           // buildConfigField("String", "BASE_URL", "\"http://192.168.2.173:3050/api/\"")
+            buildConfigField("String", "BASE_URL", "\"http://192.168.0.102:3050/api/\"")
             buildConfigField("String", "API_KEY", "\"ABCXYZ123TEST\"")
         }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "BASE_URL", "\"http://192.168.2.173:3050/api/\"")
+           // buildConfigField("String", "BASE_URL", "\"http://192.168.2.173:3050/api/\"")
+            buildConfigField("String", "BASE_URL", "\"http://192.168.0.102:3050/api/\"")
             buildConfigField("String", "API_KEY", "\"ABCXYZ123TEST\"")
         }
     }
@@ -106,3 +108,4 @@ dependencies {
 
     implementation 'de.hdodenhof:circleimageview:3.0.0'
 }
+apply plugin: 'com.google.gms.google-services'

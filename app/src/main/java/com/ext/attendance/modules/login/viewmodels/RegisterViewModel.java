@@ -11,6 +11,7 @@ import com.google.gson.JsonObject;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import timber.log.Timber;
 
 
 public class RegisterViewModel extends BaseViewModel<RegisterNavigator> {
@@ -43,7 +44,7 @@ public class RegisterViewModel extends BaseViewModel<RegisterNavigator> {
         return jsonObjectMutableLiveData;
     }
 
-  public boolean inputValidation(String Name, String lName, String email, String contact, String reportingTo) {
+    public boolean inputValidation(String Name, String lName, String email, String contact) {
         if (Name.isEmpty()) {
             return false;
         }
@@ -62,9 +63,7 @@ public class RegisterViewModel extends BaseViewModel<RegisterNavigator> {
         if (contact.length() < 10) {
             return false;
         }
-        if(reportingTo.isEmpty()){
-            return false;
-        }
+
 //        if(emergancyContact.isEmpty()){
 //            return false;
 //        }
@@ -97,6 +96,9 @@ public class RegisterViewModel extends BaseViewModel<RegisterNavigator> {
                             mDisposable.dispose();
                             generalResponseMutableLiveData.setValue(generalResponse);
                         } else {
+                            if (generalResponse.getMessage() != null)
+                                Timber.d("RES_ERROR_MSG:%s", generalResponse.getMessage());
+
                             getNavigator().loadProgressBar(false);
                             mDisposable.dispose();
                         }

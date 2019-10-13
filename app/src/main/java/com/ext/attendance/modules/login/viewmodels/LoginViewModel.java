@@ -80,7 +80,7 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
         }, new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {
-                getNavigator().loadProgressBar(true);
+                getNavigator().loadProgressBar(false);
                 getNavigator().handleError(throwable);
             }
 

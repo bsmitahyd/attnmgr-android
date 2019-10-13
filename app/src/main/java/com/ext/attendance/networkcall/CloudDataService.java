@@ -44,7 +44,7 @@ public class CloudDataService extends MyApiService {
     }
 
     @Override
-    public Observable<CurrentMonthAttendanceResponseModel> getCurrentMonthAttendanceListByEmpId(int employeeId) {
+    public Observable<CurrentMonthAttendanceResponseModel> getCurrentMonthAttendanceListByEmpId(String employeeId) {
         return service.getCurrentMonthAttendanceData(employeeId)
                 .subscribeOn(Schedulers.io()) // “work” on io thread
                 .observeOn(AndroidSchedulers.mainThread()); // “listen” on UIThread;

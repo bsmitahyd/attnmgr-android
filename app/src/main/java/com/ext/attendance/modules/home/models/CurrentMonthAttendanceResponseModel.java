@@ -7,6 +7,7 @@ import java.util.List;
 
 public class CurrentMonthAttendanceResponseModel {
 
+
     @Expose
     @SerializedName("data")
     private List<Data> data;
@@ -61,25 +62,16 @@ public class CurrentMonthAttendanceResponseModel {
         private double checkoutlat;
         @Expose
         @SerializedName("checkout_time")
-        private int checkoutTime;
+        private long checkoutTime = 0;
         @Expose
         @SerializedName("address_chechout")
         private String addressChechout;
-        @Expose
-        @SerializedName("__v")
-        private int V;
-        @Expose
-        @SerializedName("updatedAt")
-        private String updatedat;
-        @Expose
-        @SerializedName("createdAt")
-        private String createdat;
         @Expose
         @SerializedName("employeeId")
         private String employeeid;
         @Expose
         @SerializedName("checkin_time")
-        private int checkinTime;
+        private long checkinTime = 0;
         @Expose
         @SerializedName("address_chechin")
         private String addressChechin;
@@ -91,10 +83,26 @@ public class CurrentMonthAttendanceResponseModel {
         private double checkinlat;
         @Expose
         @SerializedName("date")
-        private String date;
+        private String date = "";
         @Expose
         @SerializedName("_id")
         private String Id;
+
+        public long getCheckoutTime() {
+            return checkoutTime;
+        }
+
+        public void setCheckoutTime(long checkoutTime) {
+            this.checkoutTime = checkoutTime;
+        }
+
+        public long getCheckinTime() {
+            return checkinTime;
+        }
+
+        public void setCheckinTime(long checkinTime) {
+            this.checkinTime = checkinTime;
+        }
 
         public double getCheckoutlng() {
             return checkoutlng;
@@ -112,13 +120,6 @@ public class CurrentMonthAttendanceResponseModel {
             this.checkoutlat = checkoutlat;
         }
 
-        public int getCheckoutTime() {
-            return checkoutTime;
-        }
-
-        public void setCheckoutTime(int checkoutTime) {
-            this.checkoutTime = checkoutTime;
-        }
 
         public String getAddressChechout() {
             return addressChechout;
@@ -128,29 +129,6 @@ public class CurrentMonthAttendanceResponseModel {
             this.addressChechout = addressChechout;
         }
 
-        public int getV() {
-            return V;
-        }
-
-        public void setV(int V) {
-            this.V = V;
-        }
-
-        public String getUpdatedat() {
-            return updatedat;
-        }
-
-        public void setUpdatedat(String updatedat) {
-            this.updatedat = updatedat;
-        }
-
-        public String getCreatedat() {
-            return createdat;
-        }
-
-        public void setCreatedat(String createdat) {
-            this.createdat = createdat;
-        }
 
         public String getEmployeeid() {
             return employeeid;
@@ -158,14 +136,6 @@ public class CurrentMonthAttendanceResponseModel {
 
         public void setEmployeeid(String employeeid) {
             this.employeeid = employeeid;
-        }
-
-        public int getCheckinTime() {
-            return checkinTime;
-        }
-
-        public void setCheckinTime(int checkinTime) {
-            this.checkinTime = checkinTime;
         }
 
         public String getAddressChechin() {
