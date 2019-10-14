@@ -61,7 +61,6 @@ public class AttendanceViewModel extends BaseViewModel<CommonNavigator> {
                         if (employeeCheckInOutResponseModel.getStatus() == 200) {
                             mDisposable.dispose();
                             employeeCheckInOutResponseModelMutableLiveData.setValue(employeeCheckInOutResponseModel);
-                            // getCurrentMonthAttendance();
                         } else {
                             getNavigator().loadProgressBar(false);
                         }

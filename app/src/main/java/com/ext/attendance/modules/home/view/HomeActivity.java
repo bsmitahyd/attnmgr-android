@@ -1,9 +1,13 @@
 package com.ext.attendance.modules.home.view;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,7 +28,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.ext.attendance.R;
 import com.ext.attendance.apputils.AppUtils;
@@ -42,7 +45,10 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.material.navigation.NavigationView;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 import timber.log.Timber;
 
@@ -59,7 +65,9 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     private static final int TIME_DELAY = 2000;
     private static long back_pressed;
     private Session session;
+
     private TextView employeeIdTextView;
+    private TextView NameTextView;
 
 
     private Location location;
@@ -76,6 +84,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
     public double latitude = 0.0;
     public double longitude = 0.0;
+    public String address = null;
 
     @Override
     protected int layoutRes() {
@@ -97,10 +106,9 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
     }
 
+    @SuppressLint("SetTextI18n")
     private void initView(Bundle savedInstanceState) {
         session = new Session(this);
-
-        //attendanceViewModel = ViewModelProviders.of(this).get(AttendanceViewModel.class);
 
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("");
@@ -125,9 +133,14 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         //Loading backgrounf image
         ImageView navBackground = navHeader.findViewById(R.id.img_header_bg);
 
-        //username
+        //TODO EmployeeId
         employeeIdTextView = navHeader.findViewById(R.id.tvEmployeeId);
-        employeeIdTextView.setText(String.valueOf("EmployeeId" + session.getEmployeeId()));
+        employeeIdTextView.setText("EmpId : " + session.getEmployeeId());
+
+        //name
+        employeeIdTextView = navHeader.findViewById(R.id.tvName);
+        employeeIdTextView.setText(session.getFname()+ " " + session.getLname());
+
 
 
         //Select Home by default
@@ -154,6 +167,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                         new String[permissionsToRequest.size()]), ALL_PERMISSIONS_RESULT);
             }
         }
+
 
         // we build google api client
         googleApiClient = new GoogleApiClient.Builder(this).
@@ -360,6 +374,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
             latitude = location.getLatitude();
             longitude = location.getLongitude();
             Timber.d("Latitude : " + location.getLatitude() + "\nLongitude : " + location.getLongitude());
+            getAddressFromLocation(latitude, longitude);
         }
 
         startLocationUpdates();
@@ -395,6 +410,36 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
             latitude = location.getLatitude();
             longitude = location.getLongitude();
             Timber.d("Latitude : " + location.getLatitude() + "\nLongitude : " + location.getLongitude());
+            getAddressFromLocation(latitude, longitude);
+        }
+    }
+
+    //TODO getting Address from latitude and longitude
+    private void getAddressFromLocation(double latitude, double longitude) {
+
+        Geocoder geocoder = new Geocoder(this, Locale.ENGLISH);
+
+        try {
+            List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            address = addresses.get(0).getAddressLine(0);
+            Timber.d(address);
+
+//            if (addresses.size() > 0) {
+//                Address fetchedAddress = addresses.get(0);
+////                StringBuilder strAddress = new StringBuilder();
+////                for (int i = 0; i < fetchedAddress.getMaxAddressLineIndex(); i++) {
+////                    strAddress.append(fetchedAddress.getAddressLine(i)).append(" ");
+////                }
+////
+////                Timber.d(strAddress.toString());
+//
+//            } else {
+//                Timber.d("Searching Current Address");
+//            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            showToast(this, "Could not get address..!");
         }
     }
 

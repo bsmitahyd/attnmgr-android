@@ -6,7 +6,7 @@
     android:background="@color/app_text_color_white">
 
     <ProgressBar
-        android:id="@+id/api_progress"
+        android:id="@+id/profile_progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_5sdp"
@@ -18,13 +18,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/pandit_profile_main_sc"
+        android:id="@+id/emp_profile_main_sc"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonUpdateProfile"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cvProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
@@ -33,17 +34,27 @@
 
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imageViewPandit"
+                android:id="@+id/imageViewEmp"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_50sdp"
                 android:src="@mipmap/ic_launcher_round"
                 app:civ_border_color="#FF000000"
                 app:civ_border_width="2dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/cvProfile" />
 
+
+            <TextView
+                android:id="@+id/tvPersonalInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:padding="@dimen/_8sdp"
+                android:text="@string/personal_info"
+                android:textColorHint="@color/grey_333"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewEmp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/fNameEditTextCV"
@@ -53,10 +64,10 @@
                 android:layout_marginTop="@dimen/_30sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageViewPandit">
+                app:layout_constraintTop_toBottomOf="@+id/imageViewEmp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/fNameEditText"
+                    android:id="@+id/etName"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="@string/name"
@@ -74,20 +85,19 @@
                 style="@style/TextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_30sdp"
                 app:layout_constraintEnd_toEndOf="@+id/fNameEditTextCV"
                 app:layout_constraintStart_toStartOf="@+id/fNameEditTextCV"
                 app:layout_constraintTop_toBottomOf="@+id/fNameEditTextCV">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/mNameEditText"
+                    android:id="@+id/etMName"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="@string/middle_name"
                     android:inputType="textPersonName"
                     android:maxLength="100"
                     android:maxLines="1"
-                    android:padding="@dimen/_15sdp"
+                    android:padding="@dimen/_12sdp"
                     android:textColor="@color/black"
                     android:textColorHint="@color/hint_color" />
 
@@ -98,20 +108,19 @@
                 style="@style/TextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
                 app:layout_constraintEnd_toEndOf="@+id/mNameEditTextCV"
                 app:layout_constraintStart_toStartOf="@+id/mNameEditTextCV"
                 app:layout_constraintTop_toBottomOf="@+id/mNameEditTextCV">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/lastNameEditText"
+                    android:id="@+id/etLastName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/last_name"
                     android:imeOptions="actionNext"
                     android:inputType="textPersonName"
                     android:maxLines="1"
-                    android:padding="@dimen/_15sdp"
+                    android:padding="@dimen/_12sdp"
                     android:textColor="@color/black"
                     android:textColorHint="@color/hint_color" />
 
@@ -122,20 +131,19 @@
                 style="@style/TextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
                 app:layout_constraintEnd_toEndOf="@+id/lastNameEditTextCV"
                 app:layout_constraintStart_toStartOf="@+id/lastNameEditTextCV"
                 app:layout_constraintTop_toBottomOf="@+id/lastNameEditTextCV">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/emailEditText"
+                    android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/email"
                     android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
-                    android:padding="@dimen/_15sdp"
+                    android:padding="@dimen/_12sdp"
                     android:textColor="@color/black"
                     android:textColorHint="@color/hint_color" />
 
@@ -147,13 +155,12 @@
                 style="@style/TextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
                 app:layout_constraintEnd_toEndOf="@+id/emailEditTextCv"
                 app:layout_constraintStart_toStartOf="@+id/emailEditTextCv"
                 app:layout_constraintTop_toBottomOf="@+id/emailEditTextCv">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/mobileEditText"
+                    android:id="@+id/etContact"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="false"
@@ -161,7 +168,7 @@
                     android:hint="@string/contact"
                     android:inputType="number"
                     android:maxLength="10"
-                    android:padding="@dimen/_15sdp"
+                    android:padding="@dimen/_12sdp"
                     android:textColor="@color/black"
                     android:textColorHint="@color/hint_color" />
 
@@ -171,8 +178,8 @@
                 android:id="@+id/officialInfoTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
                 android:gravity="center|start"
+                android:padding="@dimen/_8sdp"
                 android:text="@string/official_info"
                 android:textColorHint="@color/grey_333"
                 app:layout_constraintTop_toBottomOf="@+id/mobileEditTextCv" />
@@ -182,20 +189,19 @@
                 style="@style/TextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
                 app:layout_constraintEnd_toEndOf="@+id/officialInfoTv"
                 app:layout_constraintStart_toStartOf="@+id/officialInfoTv"
                 app:layout_constraintTop_toBottomOf="@+id/officialInfoTv">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/branchEditText"
+                    android:id="@+id/etBranch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/branch"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:padding="@dimen/_15sdp"
+                    android:padding="@dimen/_12sdp"
                     android:textColor="@color/black"
                     android:textColorHint="@color/hint_color" />
 
@@ -206,13 +212,12 @@
                 style="@style/TextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
                 app:layout_constraintEnd_toEndOf="@+id/branchEditTextCv"
                 app:layout_constraintStart_toStartOf="@+id/branchEditTextCv"
                 app:layout_constraintTop_toBottomOf="@+id/branchEditTextCv">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/deptEditText"
+                    android:id="@+id/etDepartment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/department"
@@ -231,20 +236,19 @@
                 style="@style/TextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
                 app:layout_constraintEnd_toEndOf="@+id/deptEditTextCv"
                 app:layout_constraintStart_toStartOf="@+id/deptEditTextCv"
                 app:layout_constraintTop_toBottomOf="@+id/deptEditTextCv">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/designationEditText"
+                    android:id="@+id/etDesignation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/designation"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:padding="@dimen/_15sdp"
+                    android:padding="@dimen/_12sdp"
                     android:textColor="@color/black"
                     android:textColorHint="@color/hint_color" />
 
@@ -255,21 +259,20 @@
                 style="@style/TextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
                 app:layout_constraintEnd_toEndOf="@+id/designationEditTextCv"
                 app:layout_constraintStart_toStartOf="@+id/designationEditTextCv"
                 app:layout_constraintTop_toBottomOf="@+id/designationEditTextCv">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/dojET"
+                    android:id="@+id/etDOJ"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:drawableEnd="@drawable/ic_calendar"
                     android:hint="@string/date_of_joining"
                     android:imeOptions="actionNext"
-                    android:drawableEnd="@drawable/ic_calendar"
                     android:inputType="date"
                     android:maxLines="1"
-                    android:padding="@dimen/_15sdp"
+                    android:padding="@dimen/_12sdp"
                     android:textColor="@color/black"
                     android:textColorHint="@color/hint_color" />
 
@@ -280,20 +283,19 @@
                 style="@style/TextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
                 app:layout_constraintEnd_toEndOf="@+id/dojTextInputLayout"
                 app:layout_constraintStart_toStartOf="@+id/dojTextInputLayout"
                 app:layout_constraintTop_toBottomOf="@+id/dojTextInputLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/reportingToET"
+                    android:id="@+id/etReportingTo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="@string/reporting_to"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:padding="@dimen/_15sdp"
+                    android:padding="@dimen/_12sdp"
                     android:textColor="@color/black"
                     android:textColorHint="@color/hint_color" />
 
@@ -305,20 +307,19 @@
                 style="@style/TextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
                 app:layout_constraintEnd_toEndOf="@+id/reportingToTextInputLayout"
                 app:layout_constraintStart_toStartOf="@+id/reportingToTextInputLayout"
                 app:layout_constraintTop_toBottomOf="@+id/reportingToTextInputLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/companyET"
+                    android:id="@+id/etCompany"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="@string/company"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:padding="@dimen/_15sdp"
+                    android:padding="@dimen/_12sdp"
                     android:textColor="@color/black"
                     android:textColorHint="@color/hint_color" />
 

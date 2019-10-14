@@ -32,9 +32,7 @@ import com.ext.attendance.prefs.Session;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
@@ -198,7 +196,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty(AppKeysInterface.CHECKINLAT, activity.latitude);
                     jsonObject.addProperty(AppKeysInterface.CHECKINLNG, activity.longitude);
-                    jsonObject.addProperty(AppKeysInterface.ADDRESS_CHECHIN, "Miyapur");
+                    jsonObject.addProperty(AppKeysInterface.ADDRESS_CHECHIN, activity.address);
                     jsonObject.addProperty(AppKeysInterface.EMPLOYEE_ID, session.getEmployeeId());
 
                     Timber.d("CheckIn_DATA:%s", new Gson().toJson(jsonObject));
@@ -212,7 +210,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty(AppKeysInterface.CHECKOUTLAT, activity.latitude);
                     jsonObject.addProperty(AppKeysInterface.CHECKOUTLNG, activity.longitude);
-                    jsonObject.addProperty(AppKeysInterface.ADDRESS_CHECHOUT, "Miyapur");
+                    jsonObject.addProperty(AppKeysInterface.ADDRESS_CHECHOUT, activity.address);
                     jsonObject.addProperty(AppKeysInterface.EMPLOYEE_ID, session.getEmployeeId());
 
                     Timber.d("CheckOut_DATA:%s", new Gson().toJson(jsonObject));

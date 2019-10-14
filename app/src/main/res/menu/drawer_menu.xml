@@ -3,7 +3,6 @@
 
     <group android:checkableBehavior="single">
 
-
         <item
             android:id="@+id/nav_attendance_fragment"
             android:title="@string/attendance" />
@@ -16,7 +15,6 @@
             android:id="@+id/nav_aboutus_fragment"
             android:icon="@drawable/ic_information"
             android:title="@string/about_us" />
-
 
         <item
             android:id="@+id/nav_logout"

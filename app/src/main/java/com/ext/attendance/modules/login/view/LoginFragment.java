@@ -56,6 +56,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
 
     private LoginViewModel mLoginViewModel;
+    private Session session;
 
     @Override
     protected int layoutRes() {
@@ -66,8 +67,6 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
-    private Session session;
 
     @Nullable
     @Override
@@ -85,6 +84,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
     private void initView() {
         session = new Session(activity);
+
         loginButton.setOnClickListener(this);
         registerButton.setOnClickListener(this);
 
@@ -129,9 +129,11 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
                 if (mLoginViewModel.inputValidation(employeeIdEditText.getText().toString(), passwordEditText.getText().toString(), androidId)) {
                     if (mLoginViewModel.jsonObjectMutableLiveData().getValue() != null) {
                         JsonObject jsonObject = new JsonObject();
+
                         jsonObject.addProperty(AppKeysInterface.EMPLOYEE_ID, employeeIdEditText.getText().toString());
                         jsonObject.addProperty(AppKeysInterface.PASSWORD, passwordEditText.getText().toString());
-                        jsonObject.addProperty(AppKeysInterface.DEVICE_ID, androidId);
+                        jsonObject.addProperty(AppKeysInterface.DEVICE_ID, "c1e9293645243213");
+
                         Timber.d("%s%s", AppKeysInterface.EMPLOYEE_ID, employeeIdEditText.getText().toString());
                         Timber.d("%s%s", AppKeysInterface.PASSWORD, passwordEditText.getText().toString());
                         Timber.d("%s%s", AppKeysInterface.DEVICE_ID, androidId);

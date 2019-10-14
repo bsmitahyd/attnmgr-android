@@ -12,15 +12,15 @@ android {
     }
     buildTypes {
         debug {
-           // buildConfigField("String", "BASE_URL", "\"http://192.168.2.173:3050/api/\"")
-            buildConfigField("String", "BASE_URL", "\"http://192.168.0.102:3050/api/\"")
+            buildConfigField("String", "BASE_URL", "\"http:192.168.16.184:3050/api/\"")
+            // buildConfigField("String", "BASE_URL", "\"http://192.168.0.102:3050/api/\"")
             buildConfigField("String", "API_KEY", "\"ABCXYZ123TEST\"")
         }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-           // buildConfigField("String", "BASE_URL", "\"http://192.168.2.173:3050/api/\"")
-            buildConfigField("String", "BASE_URL", "\"http://192.168.0.102:3050/api/\"")
+            buildConfigField("String", "BASE_URL", "\"http://192.168.16.184/api/\"")
+            // buildConfigField("String", "BASE_URL", "\"http://192.168.0.102:3050/api/\"")
             buildConfigField("String", "API_KEY", "\"ABCXYZ123TEST\"")
         }
     }
@@ -63,11 +63,11 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
 
     implementation 'com.google.code.gson:gson:2.8.5'
-     //binding for Android views
+    //binding for Android views
     implementation "com.jakewharton:butterknife:$butterKnifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
 
-   // logging utility class
+    // logging utility class
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
     //retrofit
