@@ -28,7 +28,7 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
         loginResponseModelMutableLiveData.setValue(new LoginResponseModel());
         jsonObjectMutableLiveData.setValue(new JsonObject());
     }
-    private void clearViewModelData() {
+    public void clearViewModelData() {
         loginResponseModelMutableLiveData.setValue(null);
         jsonObjectMutableLiveData.setValue(null);
     }

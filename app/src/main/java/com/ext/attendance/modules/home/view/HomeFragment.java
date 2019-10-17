@@ -131,7 +131,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
             }
         });
-
     }
 
     @SuppressLint("SetTextI18n")
@@ -194,6 +193,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
                 Toast.makeText(activity, "LatLng:" + activity.latitude + " " + activity.longitude, Toast.LENGTH_SHORT).show();
                 if (mAttendanceViewModel.getJsonObjectMutableLiveData() != null) {
                     JsonObject jsonObject = new JsonObject();
+
                     jsonObject.addProperty(AppKeysInterface.CHECKINLAT, activity.latitude);
                     jsonObject.addProperty(AppKeysInterface.CHECKINLNG, activity.longitude);
                     jsonObject.addProperty(AppKeysInterface.ADDRESS_CHECHIN, activity.address);
@@ -255,5 +255,11 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
     }
 
-
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if(mAttendanceViewModel!=null){
+            mAttendanceViewModel.clearViewModelData();
+        }
+    }
 }

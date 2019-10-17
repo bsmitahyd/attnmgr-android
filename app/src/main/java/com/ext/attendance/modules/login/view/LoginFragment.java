@@ -198,13 +198,16 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if (unbinder != null) {
+            unbinder.unbind();
+        }
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (unbinder != null) {
-            unbinder.unbind();
+        if (mLoginViewModel != null) {
+            mLoginViewModel.clearViewModelData();
         }
     }
 }

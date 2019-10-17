@@ -2,7 +2,6 @@ package com.ext.attendance.modules.home.view;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -61,14 +60,11 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     private View navHeader;
     public TextView toolbarTitle;
     private AttendanceViewModel attendanceViewModel;
+    private TextView employeeIdTextView;
 
     private static final int TIME_DELAY = 2000;
     private static long back_pressed;
     private Session session;
-
-    private TextView employeeIdTextView;
-    private TextView NameTextView;
-
 
     private Location location;
     private GoogleApiClient googleApiClient;
@@ -84,7 +80,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
     public double latitude = 0.0;
     public double longitude = 0.0;
-    public String address = null;
+    public String address = "";
 
     @Override
     protected int layoutRes() {
@@ -103,7 +99,6 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
             getSupportFragmentManager().beginTransaction().replace(R.id.home_container, fragment, "currentFragment").addToBackStack(null).commit();
         else
             getSupportFragmentManager().beginTransaction().replace(R.id.home_container, fragment, "currentFragment").commit();
-
     }
 
     @SuppressLint("SetTextI18n")
@@ -115,7 +110,6 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         toolbarTitle = findViewById(R.id.toolbarTitle);
 
         setSupportActionBar(toolbar);
-
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -141,8 +135,6 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         employeeIdTextView = navHeader.findViewById(R.id.tvName);
         employeeIdTextView.setText(session.getFname()+ " " + session.getLname());
 
-
-
         //Select Home by default
         navigationView.setCheckedItem(R.id.nav_attendance_fragment);
         Fragment fragment = new HomeFragment();
@@ -167,7 +159,6 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                         new String[permissionsToRequest.size()]), ALL_PERMISSIONS_RESULT);
             }
         }
-
 
         // we build google api client
         googleApiClient = new GoogleApiClient.Builder(this).
@@ -351,10 +342,8 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
             } else {
                 finish();
             }
-
             return false;
         }
-
         return true;
     }
 
@@ -398,6 +387,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public void onConnectionSuspended(int i) {
+
     }
 
     @Override

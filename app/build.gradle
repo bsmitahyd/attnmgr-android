@@ -1,26 +1,26 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.ext.attendance"
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         debug {
-            buildConfigField("String", "BASE_URL", "\"http:192.168.16.184:3050/api/\"")
-            // buildConfigField("String", "BASE_URL", "\"http://192.168.0.102:3050/api/\"")
+            buildConfigField("String", "BASE_URL", "\"http://192.168.2.173:3050/api/\"")
+           // buildConfigField("String", "BASE_URL", "\"http://192.168.0.102:3050/api/\"")
             buildConfigField("String", "API_KEY", "\"ABCXYZ123TEST\"")
         }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "BASE_URL", "\"http://192.168.16.184/api/\"")
-            // buildConfigField("String", "BASE_URL", "\"http://192.168.0.102:3050/api/\"")
+            buildConfigField("String", "BASE_URL", "\"http://192.168.2.173:3050/api/\"")
+           // buildConfigField("String", "BASE_URL", "\"http://192.168.0.102:3050/api/\"")
             buildConfigField("String", "API_KEY", "\"ABCXYZ123TEST\"")
         }
     }
@@ -63,11 +63,11 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
 
     implementation 'com.google.code.gson:gson:2.8.5'
-    //binding for Android views
+     //binding for Android views
     implementation "com.jakewharton:butterknife:$butterKnifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
 
-    // logging utility class
+   // logging utility class
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
     //retrofit
@@ -107,5 +107,8 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
 
     implementation 'de.hdodenhof:circleimageview:3.0.0'
+
+    /*barcose scanner lib*/
+    implementation 'me.dm7.barcodescanner:zxing:1.9'
 }
 apply plugin: 'com.google.gms.google-services'

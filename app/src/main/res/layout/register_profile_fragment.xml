@@ -222,6 +222,80 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <RelativeLayout
+                android:id="@+id/aadharBottomRL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/tvDesignation">
+
+                <TextView
+                    android:id="@+id/aadharLabelTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:gravity="center|start"
+                    android:text="@string/aadhar_details"
+                    android:textColorHint="@color/black"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/scanAadharBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/rounded_corner_button_bg"
+                    android:minWidth="@dimen/_70sdp"
+                    android:text="@string/scan_your_aadhar" />
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/aadharDetailsTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/edit_bg_selected"
+                android:gravity="center|start"
+                android:minHeight="@dimen/_50sdp"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:text="@string/_333945213652"
+                android:textColorHint="@color/hint_color"
+                app:layout_constraintTop_toBottomOf="@+id/aadharBottomRL" />
+
+
+            <RelativeLayout
+                android:id="@+id/profilePicBottomRL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/aadharDetailsTV">
+
+                <TextView
+                    android:id="@+id/profilePicLabelTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:gravity="center|start"
+                    android:text="@string/profile_pic"
+                    android:textColorHint="@color/black"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/profilePicImageView"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/ic_image_size_select_actual"
+                    android:contentDescription="@string/profile_pic" />
+
+            </RelativeLayout>
             <ProgressBar
                 android:id="@+id/pbRegister"
                 style="?android:attr/progressBarStyle"
@@ -244,7 +318,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@drawable/rounded_corner_button_bg"
         android:padding="@dimen/_10sdp"
-        android:text="Register"
+        android:text="@string/register"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

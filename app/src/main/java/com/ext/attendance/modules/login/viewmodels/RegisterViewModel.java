@@ -31,7 +31,7 @@ public class RegisterViewModel extends BaseViewModel<RegisterNavigator> {
 
     }
 
-    private void clearViewModelData() {
+    public void clearViewModelData() {
         generalResponseMutableLiveData.setValue(null);
         jsonObjectMutableLiveData.setValue(null);
     }

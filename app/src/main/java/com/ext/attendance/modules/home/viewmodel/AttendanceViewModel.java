@@ -78,6 +78,7 @@ public class AttendanceViewModel extends BaseViewModel<CommonNavigator> {
 
         getNavigator().loadProgressBar(true);
         Session session = new Session(MyApplication.getInstance().getApplicationContext());
+
         mDisposable = MyApiService.getService().getCurrentMonthAttendanceListByEmpId(session.getEmployeeId())
                 .subscribe(new Consumer<CurrentMonthAttendanceResponseModel>() {
                     @Override

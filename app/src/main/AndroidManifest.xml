@@ -41,16 +41,32 @@
         <activity
             android:name=".modules.login.view.LoginBaseActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
-        <!--        <activity-->
-        <!--            android:name=".modules.login.view.LoginBaseActivity"-->
-        <!--            android:launchMode="singleTop"-->
-        <!--            android:screenOrientation="portrait"-->
-        <!--            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />-->
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".modules.login.view.BarcodeScannerActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".modules.home.view.HomeActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <provider
+            android:name=".apputils.GeneralFileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
         <service
             android:name=".push.AttnMgrFireBaseMessagingService"
             android:stopWithTask="false">

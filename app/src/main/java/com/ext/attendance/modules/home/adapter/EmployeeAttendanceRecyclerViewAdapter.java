@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ext.attendance.R;
 import com.ext.attendance.apputils.AppUtils;
-import com.ext.attendance.modules.home.interfaces.OnEmployeeAttendanceClickedInterface;
 import com.ext.attendance.modules.home.models.CurrentMonthAttendanceResponseModel;
 
 import java.util.List;
