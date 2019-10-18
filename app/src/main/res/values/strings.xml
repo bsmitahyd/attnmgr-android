@@ -53,7 +53,8 @@
     <string name="profile_pic">Profile Pic</string>
     <string name="_333945213652">333945213652</string>
     <string name="scan_your_aadhar">Scan Your Aadhar</string>
-    <string name="aadhar_details">Aadhar Details:</string>
+    <string name="aadhar_details">Aadhar Card Details:</string>
+    <string name="pan_pic">PAN Card Pic</string>
 
 
 </resources>

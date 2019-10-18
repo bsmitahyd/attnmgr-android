@@ -14,8 +14,6 @@ import com.ext.attendance.BuildConfig;
 import com.ext.attendance.R;
 import com.ext.attendance.apputils.Constants;
 import com.ext.attendance.interfaces.PickImageDialogInterface;
-import com.ext.attendance.modules.home.view.HomeActivity;
-
 import com.ext.attendance.modules.login.view.LoginBaseActivity;
 import com.yalantis.ucrop.UCrop;
 
@@ -98,7 +96,7 @@ public class PickImageDialog {
     private File file;
     private Uri photoUri = null;
 
-    private Uri createImageFile(boolean isGaleeryPic) {
+    private Uri createImageFile(boolean isGalleryPic) {
         try {
             // Find the SD Card path
             File filepath = Environment.getExternalStorageDirectory();
@@ -107,7 +105,7 @@ public class PickImageDialog {
             File dir = new File(filepath.getAbsolutePath());
 
             File dataFolder;
-            if (isGaleeryPic) {
+            if (isGalleryPic) {
                 File androidFolder = new File(dir, "DCIM");
                 if (!androidFolder.exists()) {
                     androidFolder.mkdir();
@@ -161,8 +159,10 @@ public class PickImageDialog {
         switch (requestCode) {
             case Constants.REQUEST_CODE_SELECT_IMAGE: //Camera
                 delegate.holdRecordingFile(photoUri, file, null, 1);
+                delegate.holdRecordingFile(photoUri, file, null, 2);
                 cropImage(photoUri, photoUri);
                 //delegate.displayPickedImage(file);
+
 
                 break;
 
@@ -170,9 +170,11 @@ public class PickImageDialog {
                 if (data != null) {
                     createImageFile(true);
                     delegate.holdRecordingFile(photoUri, file, data.getData(), 1);
+                    delegate.holdRecordingFile(photoUri, file, data.getData(), 2);
                     cropImage(data.getData(), photoUri);
                     // mActivity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, data.getData()));
                     //delegate.displayPickedImage(file);
+
                 }
 
                 break;

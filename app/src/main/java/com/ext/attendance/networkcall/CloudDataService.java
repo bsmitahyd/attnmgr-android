@@ -4,6 +4,7 @@ import com.ext.attendance.base.GeneralResponse;
 import com.ext.attendance.modules.home.models.CurrentMonthAttendanceResponseModel;
 import com.ext.attendance.modules.home.models.EmployeeCheckInOutResponseModel;
 import com.ext.attendance.modules.login.models.LoginResponseModel;
+import com.ext.attendance.modules.sidemenu.models.ChangePwdResponseModel;
 import com.google.gson.JsonObject;
 
 import io.reactivex.Observable;
@@ -46,6 +47,13 @@ public class CloudDataService extends MyApiService {
     @Override
     public Observable<CurrentMonthAttendanceResponseModel> getCurrentMonthAttendanceListByEmpId(String employeeId) {
         return service.getCurrentMonthAttendanceData(employeeId)
+                .subscribeOn(Schedulers.io()) // “work” on io thread
+                .observeOn(AndroidSchedulers.mainThread()); // “listen” on UIThread;
+    }
+
+    @Override
+    public Observable<ChangePwdResponseModel> changePasswordApiCall(JsonObject jsonObject) {
+        return service.changePasswordApiCall(jsonObject)
                 .subscribeOn(Schedulers.io()) // “work” on io thread
                 .observeOn(AndroidSchedulers.mainThread()); // “listen” on UIThread;
     }

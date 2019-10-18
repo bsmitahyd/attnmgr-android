@@ -1,5 +1,6 @@
 package com.ext.attendance.modules.login.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -47,9 +48,9 @@ public class LoginBaseActivity extends BaseActivity {
     public void addFragment(Fragment fragment, boolean addToBackStack) {
 
         if (addToBackStack)
-            getSupportFragmentManager().beginTransaction().replace(R.id.login_container, fragment).addToBackStack(null).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.login_container, fragment, "currentFragment").addToBackStack(null).commit();
         else
-            getSupportFragmentManager().beginTransaction().add(R.id.login_container, fragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.login_container, fragment, "currentFragment").commit();
 
     }
 
@@ -70,5 +71,20 @@ public class LoginBaseActivity extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            if (getCurrentFragment() instanceof RegisterFragment) {
+                ((RegisterFragment) getCurrentFragment()).onActivityResult(requestCode, resultCode, data);
+            }
+        }
+    }
+
+    private Fragment getCurrentFragment() {
+        return getSupportFragmentManager().findFragmentByTag("currentFragment");
     }
 }

@@ -92,7 +92,6 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         initView();
     }
 
-
     private void initView() {
         session = new Session(activity);
 

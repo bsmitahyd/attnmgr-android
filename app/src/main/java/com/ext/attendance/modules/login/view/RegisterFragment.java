@@ -77,6 +77,8 @@ public class RegisterFragment extends BaseFragment implements RegisterNavigator,
     private PickImageDialog mPickImageDialog;
     private Uri mImageFileUri;
     private File mImageFile;
+    private boolean pancardClicked = false;
+    private boolean profileClicked = false;
 
     @BindView(R.id.buttonRegister)
     Button registerButton;
@@ -104,6 +106,8 @@ public class RegisterFragment extends BaseFragment implements RegisterNavigator,
     ProgressBar pbRegister;
     @BindView(R.id.profilePicImageView)
     ImageView profilePicImageView;
+    @BindView(R.id.panPicImageView)
+    ImageView panPicImageView;
     @BindView(R.id.aadharDetailsTV)
     TextView aadharDetailsTextView;
     @BindView(R.id.scanAadharBtn)
@@ -160,13 +164,19 @@ public class RegisterFragment extends BaseFragment implements RegisterNavigator,
         if (session.getProfilePicUrl().length() > 0) {
             Picasso.get().load(BuildConfig.BASE_URL + "images/" + session.getProfilePicUrl()).fit().centerCrop().placeholder(R.drawable.ic_image_size_select_actual).into(profilePicImageView);
         }
+
+        if (session.getPanPicUrl().length() > 0) {
+            Picasso.get().load(BuildConfig.BASE_URL + "images/" + session.getPanPicUrl()).fit().centerCrop().placeholder(R.drawable.ic_image_size_select_actual).into(panPicImageView);
+        }
+
         registerButton.setOnClickListener(this);
         dobTextInputEditText.setOnClickListener(this);
         scanAadharButton.setOnClickListener(this);
         profilePicImageView.setOnClickListener(this);
+        panPicImageView.setOnClickListener(this);
 
         activity.toolbar.setTitle("");
-        activity.toolbarTitle.setText("Register");
+        activity.toolbarTitle.setText(R.string.register);
 
         mRegisterViewModel = ViewModelProviders.of(this).get(RegisterViewModel.class);
         mRegisterViewModel.setNavigator(this);
@@ -263,8 +273,20 @@ public class RegisterFragment extends BaseFragment implements RegisterNavigator,
                 startActivityForResult(new Intent(activity, BarcodeScannerActivity.class), 1002);
                 break;
             case R.id.profilePicImageView:
+                profileClicked = true;
+                pancardClicked = false;
                 openDialog();
                 break;
+            case R.id.panPicImageView:
+                profileClicked = false;
+                pancardClicked = true;
+                if (mPickImageDialog == null) {
+                    mPickImageDialog = new PickImageDialog(activity);
+                    mPickImageDialog.delegate = this;
+                }
+
+                checkGalleryPermission();
+
             default:
                 break;
         }
@@ -558,9 +580,13 @@ public class RegisterFragment extends BaseFragment implements RegisterNavigator,
         this.mImageFileUri = fileUri;
         this.mImageFile = file;
         if (crop == 1) {
-            Timber.d("displayPickedImage:%s", file);
-            Picasso.get().load(file).fit().centerCrop().placeholder(R.drawable.ic_image_size_select_actual).into(profilePicImageView);
-
+            if (profileClicked) {
+                Picasso.get().load(file).fit().centerCrop().placeholder(R.drawable.ic_image_size_select_actual).into(profilePicImageView);
+                Timber.d("displayPickedImage:%s", file);
+            } else if (pancardClicked) {
+                Picasso.get().load(file).fit().placeholder(R.drawable.ic_image_size_select_actual).into(panPicImageView);
+                Timber.d("displayPanPickedImage:%s", file);
+            }
         }
     }
 
@@ -571,7 +597,20 @@ public class RegisterFragment extends BaseFragment implements RegisterNavigator,
 
     @Override
     public void displayPickedImage(File file) {
-        Timber.d("displayPickedImage:%s", file);
+        if (profileClicked) {
+            Picasso.get().load(file).fit().centerCrop().placeholder(R.drawable.ic_image_size_select_actual).into(profilePicImageView);
+            Timber.d("displayPickedImage:%s", file);
+        }
+        if (pancardClicked) {
+            Picasso.get().load(file).fit().placeholder(R.drawable.ic_image_size_select_actual).into(panPicImageView);
+            Timber.d("displayPanPickedImage:%s", file);
+        }
+    }
+
+    private void cropImage(Uri sourceUri, Uri destinationUri) {
+        UCrop.of(sourceUri, destinationUri)
+                .withAspectRatio(16, 16)
+                .start(activity, new RegisterFragment());
     }
 
     @Override
@@ -589,5 +628,4 @@ public class RegisterFragment extends BaseFragment implements RegisterNavigator,
             mRegisterViewModel.clearViewModelData();
         }
     }
-
 }

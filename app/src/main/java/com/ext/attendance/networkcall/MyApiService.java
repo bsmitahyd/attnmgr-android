@@ -5,6 +5,7 @@ import com.ext.attendance.base.GeneralResponse;
 import com.ext.attendance.modules.home.models.CurrentMonthAttendanceResponseModel;
 import com.ext.attendance.modules.home.models.EmployeeCheckInOutResponseModel;
 import com.ext.attendance.modules.login.models.LoginResponseModel;
+import com.ext.attendance.modules.sidemenu.models.ChangePwdResponseModel;
 import com.google.gson.JsonObject;
 
 import io.reactivex.Observable;
@@ -36,7 +37,11 @@ public abstract class MyApiService {
     // employeeAttendanceCheckInOutApiCall
     public abstract Observable<EmployeeCheckInOutResponseModel> employeeAttendanceCheckInOutApiCall(@Body JsonObject jsonObject);
 
-    //currentMonthAttendanceListApiCall
+    //getCurrentMonthAttendanceList
     public abstract  Observable<CurrentMonthAttendanceResponseModel> getCurrentMonthAttendanceListByEmpId(@Query("employeeId") String employeeId);
+
+    //changePasswordApiCall
+
+    public abstract Observable<ChangePwdResponseModel> changePasswordApiCall(@Body JsonObject jsonObject);
 
 }

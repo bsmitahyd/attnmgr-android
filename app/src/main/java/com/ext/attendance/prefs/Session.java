@@ -31,6 +31,7 @@ public class Session {
     private static final String F_NAME = "fname";
     private static final String L_NAME = "lname";
     private static final String PROFILE_PIC_URL = "profile_pic";
+    private static final String PAN_PIC_URL = "pan_pic";
 
     public Session(Context context) {
         this._context = context;
@@ -170,8 +171,8 @@ public class Session {
     }
 
 
-    public void setProfilePicUrl(String lname) {
-        editor.putString(PROFILE_PIC_URL, lname);
+    public void setProfilePicUrl(String profile_pic) {
+        editor.putString(PROFILE_PIC_URL, profile_pic);
         editor.commit();
     }
 
@@ -179,4 +180,12 @@ public class Session {
         return pref.getString(PROFILE_PIC_URL, "");
     }
 
+    public void setPanPicUrl(String pan_pic) {
+        editor.putString(PAN_PIC_URL, pan_pic);
+        editor.commit();
+    }
+
+    public String getPanPicUrl() {
+        return pref.getString(PAN_PIC_URL, "");
+    }
 }

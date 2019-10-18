@@ -273,6 +273,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
+                android:padding="@dimen/_10sdp"
                 android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@+id/aadharDetailsTV">
 
@@ -288,6 +289,35 @@
 
                 <ImageView
                     android:id="@+id/profilePicImageView"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/ic_image_size_select_actual"
+                    android:contentDescription="@string/profile_pic" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/panPicBottomRL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:padding="@dimen/_10sdp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/aadharDetailsTV">
+
+                <TextView
+                    android:id="@+id/panPicLabelTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:gravity="center|start"
+                    android:text="@string/pan_pic"
+                    android:textColorHint="@color/black"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/panPicImageView"
                     android:layout_width="@dimen/_100sdp"
                     android:layout_height="@dimen/_100sdp"
                     android:layout_alignParentEnd="true"

@@ -414,19 +414,6 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
             address = addresses.get(0).getAddressLine(0);
             Timber.d(address);
 
-//            if (addresses.size() > 0) {
-//                Address fetchedAddress = addresses.get(0);
-////                StringBuilder strAddress = new StringBuilder();
-////                for (int i = 0; i < fetchedAddress.getMaxAddressLineIndex(); i++) {
-////                    strAddress.append(fetchedAddress.getAddressLine(i)).append(" ");
-////                }
-////
-////                Timber.d(strAddress.toString());
-//
-//            } else {
-//                Timber.d("Searching Current Address");
-//            }
-
         } catch (IOException e) {
             e.printStackTrace();
             showToast(this, "Could not get address..!");
